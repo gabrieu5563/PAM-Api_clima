@@ -6,6 +6,8 @@ https://api.openweathermap.org/data/2.5/weather?q=São Paulo&appid=f5d0dd8e2bc72
 -pesquisar por coordenada
 -rodar no celular
 -roda com a loc atual assim que abre
+-colocar imagem de sol se estiver sol e etc
+-deixar bonitinho na medida do possível
 
 {
 	"coord": {
