@@ -1,0 +1,56 @@
+https://openweathermap.org/api/one-call-3
+https://api.openweathermap.org/data/2.5/weather?q=São Paulo&appid=f5d0dd8e2bc7238a61ca96db64809e32
+
+-usar lat e long atual (net maui latitude longitude no google)
+-pesquisar por cidade
+-pesquisar por coordenada
+-rodar no celular
+-roda com a loc atual assim que abre
+
+{
+	"coord": {
+		"lon": -46.6361,
+		"lat": -23.5475
+	},
+	"weather": [
+		{
+			"id": 801,
+			"main": "Clouds",
+			"description": "few clouds",
+			"icon": "02d"
+		}
+	],
+	"base": "stations",
+	"main": {
+		"temp": 304.85,
+		"feels_like": 306.97,
+		"temp_min": 304.35,
+		"temp_max": 306.18,
+		"pressure": 1009,
+		"humidity": 50,
+		"sea_level": 1009,
+		"grnd_level": 922
+	},
+	"visibility": 10000,
+	"wind": {
+		"speed": 8.05,
+		"deg": 290,
+		"gust": 8.05
+	},
+	"clouds": {
+		"all": 20
+	},
+	"dt": 1732805985,
+	"sys": {
+		"type": 2,
+		"id": 2033898,
+		"country": "BR",
+		"sunrise": 1732781494,
+		"sunset": 1732829889
+	},
+	"timezone": -10800,
+	"id": 3448439,
+	"name": "São Paulo",
+	"cod": 200
+}
+
