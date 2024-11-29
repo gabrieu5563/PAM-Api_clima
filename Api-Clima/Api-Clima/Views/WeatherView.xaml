@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Api_Clima.Views.WeatherView"
+             Title="WeatherView">
+    <VerticalStackLayout Padding="30">
+        <Label
+            Text="São Paulo"
+            FontSize="30"
+            FontAttributes="Bold"
+            Margin="10,0,0,10"/>
+
+        <Frame
+            BackgroundColor="Wheat"
+            Padding="10"
+            CornerRadius="20"
+            HasShadow="True">
+            <HorizontalStackLayout>
+                <Label
+                    Text="25ºC"
+                    FontSize="50"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Image
+                    Source="cloud.png"
+                    HeightRequest="200"
+                    VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+
+        <Label
+            Text="Poucas Nuvens"
+            FontSize="30"
+            Margin="0,10,0,10"/> <!--Esquerda, cima, direita, baixo-->
+        <Label
+            Text="28º/22º Sensação de 28º"
+            FontSize="20"
+            Margin="0,0,0,30"/>
+
+        <!--Sol-->
+        
+        <Frame
+            BackgroundColor="Wheat"
+            Padding="10"
+            CornerRadius="20"
+            HasShadow="True">
+            <HorizontalStackLayout>
+                <VerticalStackLayout Padding="20, 20, 20, 20" >
+                    <Label
+                        Text="Nascer do Sol"
+                        HorizontalOptions="Center"
+                        FontSize="20"/>
+                    <Label
+                        Text="5:45"
+                        HorizontalOptions="Center"
+                        FontSize="25"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Padding="20, 20, 20, 20">
+                    <Label
+                        Text="Pôr do Sol"
+                        HorizontalOptions="Center"
+                        FontSize="20"/>
+                    <Label
+                        Text="18:45"
+                        HorizontalOptions="Center"
+                        FontSize="25"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Frame>
+
+            <!--Infos menores-->
+            
+        <Grid Margin="0,20,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Frame
+                BackgroundColor="Wheat"
+                Padding="10"
+                CornerRadius="20"
+                HasShadow="True"
+                Grid.Column="0"
+                Margin="0, 0, 10, 0">
+                <VerticalStackLayout>
+                    <Label
+                        Text="Humidade"
+                        FontSize="15"/>
+                    <Label
+                        Text="56%"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame
+                BackgroundColor="Wheat"
+                Padding="10"
+                CornerRadius="20"
+                HasShadow="True"
+                Grid.Column="1"
+                Margin="10, 0, 0, 0">
+                <VerticalStackLayout>
+                    <Label
+                        Text="Vento"
+                        Margin="0,10,20,10"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="8 km/h"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+
+        <!--<HorizontalStackLayout>
+            <Label
+                Text="Ventos de 8 km/h"
+                Margin="0,10,20,10"
+                VerticalOptions="Center"/>
+            <Label
+                Text="Humidade 50%"
+                VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            <Label
+                Text="Pressão de 1089 mb"
+                VerticalOptions="Center"
+                Margin="0,10,20,10"/>
+            <Label
+                Text="Visibilidade de 10km"
+                VerticalOptions="Center"/>
+        </HorizontalStackLayout>-->
+
+    </VerticalStackLayout>
+</ContentPage>
