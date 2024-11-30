@@ -3,7 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Api_Clima.Views.WeatherView"
              Title="WeatherView">
-    <VerticalStackLayout Padding="30">
+    <VerticalStackLayout Padding="30" HorizontalOptions="Center">
+        <!--input de cidade-->
+        <Frame
+            BackgroundColor="Wheat"
+            CornerRadius="15"
+            Margin="0, -10, 0, 10"
+            Padding="2, 2, 2, 2">
+            <Entry
+                Placeholder="Digite uma cidade"/>
+        </Frame>
+
         <Label
             Text="São Paulo"
             FontSize="30"
@@ -22,7 +32,7 @@
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
                 <Image
-                    Source="cloud.png"
+                    Source="thunderstorms.png"
                     HeightRequest="200"
                     VerticalOptions="Center"/>
             </HorizontalStackLayout>
@@ -71,7 +81,7 @@
 
             <!--Infos menores-->
             
-        <Grid Margin="0,20,0,20">
+        <Grid Margin="0,20,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -87,9 +97,13 @@
                 <VerticalStackLayout>
                     <Label
                         Text="Humidade"
-                        FontSize="15"/>
+                        FontSize="15"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
                     <Label
-                        Text="56%"/>
+                        Text="56%"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -103,7 +117,7 @@
                 <VerticalStackLayout>
                     <Label
                         Text="Vento"
-                        Margin="0,10,20,10"
+                        FontSize="15"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                     <Label
@@ -114,26 +128,51 @@
             </Frame>
         </Grid>
 
+        <Grid Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!--<HorizontalStackLayout>
-            <Label
-                Text="Ventos de 8 km/h"
-                Margin="0,10,20,10"
-                VerticalOptions="Center"/>
-            <Label
-                Text="Humidade 50%"
-                VerticalOptions="Center"/>
-        </HorizontalStackLayout>
+            <Frame
+                BackgroundColor="Wheat"
+                Padding="10"
+                CornerRadius="20"
+                HasShadow="True"
+                Grid.Column="0"
+                Margin="0,0,10,0">
+                <VerticalStackLayout>
+                    <Label
+                        Text="Visibilidade"
+                        FontSize="15"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="10km"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
 
-        <HorizontalStackLayout>
-            <Label
-                Text="Pressão de 1089 mb"
-                VerticalOptions="Center"
-                Margin="0,10,20,10"/>
-            <Label
-                Text="Visibilidade de 10km"
-                VerticalOptions="Center"/>
-        </HorizontalStackLayout>-->
-
+            <Frame
+                BackgroundColor="Wheat"
+                Padding="10"
+                CornerRadius="20"
+                HasShadow="True"
+                Grid.Column="1"
+                Margin="10,0,0,0">
+                <VerticalStackLayout>
+                    <Label
+                        Text="Pressão"
+                        FontSize="15"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="1089mb"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
