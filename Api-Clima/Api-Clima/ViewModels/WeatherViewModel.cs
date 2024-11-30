@@ -1,19 +1,28 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using api_clima.Models;
+using Api_Clima.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Api_Clima.Services;
+
 
 namespace Api_Clima.ViewModels
 {
-    public class WeatherViewModel
+    public partial class WeatherViewModel: ObservableObject
     {
+        [ObservableProperty]
+        private string cityInput;
+
         [ObservableProperty]
         private string cityName;
 
         [ObservableProperty]
-        private int temp;
+        private string temp;
 
         [ObservableProperty]
         private string image;
@@ -21,12 +30,12 @@ namespace Api_Clima.ViewModels
         [ObservableProperty]
         private string geral; //"poucas nuvens" nao sei como vou fazer essa bomba
 
-        [ObservableProperty]
-        private int min;
-        [ObservableProperty]  //min/max sensação de feelsLike
+        private int min;  //min/max sensação de feelsLike
         private int max;
-        [ObservableProperty]
         private int feelsLike;
+
+        [ObservableProperty]
+        private string tempExtra;
 
         [ObservableProperty]
         private float sunrise;
@@ -34,16 +43,55 @@ namespace Api_Clima.ViewModels
         private float sunset;
 
         [ObservableProperty]
-        private int humidade;
+        private string humidade;
 
         [ObservableProperty]
-        private float vento;
+        private string vento;
 
         [ObservableProperty]
-        private float visibilidade;
+        private string visibilidade;
 
         [ObservableProperty]
-        private int pressao;
+        private string pressao;
 
+        public ICommand GetCommand { get; }
+        private WeatherService service;
+
+        public WeatherViewModel()
+        {
+            service = new WeatherService();
+            GetCommand = new RelayCommand(async() => await getWeather());
+        }
+
+        private async Task getWeather()
+        {
+            if (string.IsNullOrEmpty(cityInput))
+            {
+                App.Current.MainPage.DisplayAlert("Erro", "Escolha a cidade que deseja buscar", "ok");
+                return;
+            } else
+            {
+                var response = await service.GetWeatherResponse(cityInput);
+
+                if (response != null && response.main != null)
+                {
+                    CityName = response.name;
+                    Temp = (response.main.temp - 273.15) + "ºC";
+                    Geral = response.weather[0].main;
+                    //Min = (int)(response.main.temp_min - 273.15);
+                    //Max = (int)(response.main.temp_max - 273.15);
+                    //FeelsLike = (int)(response.main.feels_like - 273.15);
+                    tempExtra = (int)(response.main.temp_max - 273.15) + "ºC/" + (int)(response.main.temp_min - 273.15) + "ºC. Sensação de " + (int)(response.main.feels_like - 273.15);
+                    Humidade = response.main.humidity + "%";
+                    Vento = response.wind.speed + "km/h";
+                    Visibilidade = response.visibility/ 1000f + "km";
+                    Pressao = response.main.pressure + "mb";
+                } else
+                {
+                    App.Current.MainPage.DisplayAlert($"Erro", $"Não foi possível recuperar as informações do clima de {cityInput}.", "Ok");
+                }
+
+            }
+        }
     }
 }

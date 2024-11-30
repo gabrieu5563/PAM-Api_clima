@@ -4,18 +4,40 @@
              x:Class="Api_Clima.Views.WeatherView"
              Title="WeatherView">
     <VerticalStackLayout Padding="30" HorizontalOptions="Center">
-        <!--input de cidade-->
         <Frame
             BackgroundColor="Wheat"
             CornerRadius="15"
             Margin="0, -10, 0, 10"
-            Padding="2, 2, 2, 2">
-            <Entry
-                Placeholder="Digite uma cidade"/>
+            Padding="2">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <Button
+                    Grid.Column="0"
+                    ImageSource="lupa.png"
+                    HeightRequest="25"
+                    BackgroundColor="Wheat"
+                    Padding="0"
+                    Command="{Binding GetCommand}"/>
+                <Entry
+                    Grid.Column="1"
+                    Placeholder="Digite uma cidade"
+                    Text="{Binding CityInput}"
+                    VerticalOptions="Center"
+                    Margin="5,0"
+                    TextColor="Black"
+                    PlaceholderColor="LightGray"/>
+                <Button
+                    Grid.Column="2"
+                    Text="Buscar"
+                    Command="{Binding GetCommand}"
+                    VerticalOptions="Center"
+                    BackgroundColor="Wheat"
+                    TextColor="Black"/>
+            </Grid>
         </Frame>
 
+
         <Label
-            Text="São Paulo"
+            Text="{Binding CityName}"
             FontSize="30"
             FontAttributes="Bold"
             Margin="10,0,0,10"/>
@@ -27,24 +49,24 @@
             HasShadow="True">
             <HorizontalStackLayout>
                 <Label
-                    Text="25ºC"
+                    Text="{Binding Temp}"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
                 <Image
-                    Source="thunderstorms.png"
+                    Source="thunderstorms.png" 
                     HeightRequest="200"
-                    VerticalOptions="Center"/>
+                    VerticalOptions="Center"/>   <!--Fazer lógica de imagem-->
             </HorizontalStackLayout>
         </Frame>
 
 
         <Label
-            Text="Poucas Nuvens"
+            Text="{Binding Geral}"
             FontSize="30"
             Margin="0,10,0,10"/> <!--Esquerda, cima, direita, baixo-->
         <Label
-            Text="28º/22º Sensação de 28º"
+            Text="{Binding TempExtra}"
             FontSize="20"
             Margin="0,0,0,30"/>
 
@@ -60,7 +82,7 @@
                     <Label
                         Text="Nascer do Sol"
                         HorizontalOptions="Center"
-                        FontSize="20"/>
+                        FontSize="18"/>
                     <Label
                         Text="5:45"
                         HorizontalOptions="Center"
@@ -70,7 +92,7 @@
                     <Label
                         Text="Pôr do Sol"
                         HorizontalOptions="Center"
-                        FontSize="20"/>
+                        FontSize="18"/>
                     <Label
                         Text="18:45"
                         HorizontalOptions="Center"
@@ -101,7 +123,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                     <Label
-                        Text="56%"
+                        Text="{Binding Humidade}"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                 </VerticalStackLayout>
@@ -121,7 +143,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                     <Label
-                        Text="8 km/h"
+                        Text="{Binding Vento}"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                 </VerticalStackLayout>
@@ -148,7 +170,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                     <Label
-                        Text="10km"
+                        Text="{Binding Visibilidade}"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                 </VerticalStackLayout>
@@ -168,7 +190,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                     <Label
-                        Text="1089mb"
+                        Text="{Binding Pressao}"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"/>
                 </VerticalStackLayout>
