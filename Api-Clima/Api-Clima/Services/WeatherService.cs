@@ -16,7 +16,6 @@ namespace Api_Clima.Services
         private HttpClient httpClient;
         private WeatherResponse response;
         private JsonSerializerOptions jsonSerializerOptions;
-        Uri uri = new Uri("https://api.openweathermap.org/data/2.5/weather?q=(cityInput aqui)&appid=");
 
         public WeatherService()
         {
@@ -49,6 +48,31 @@ namespace Api_Clima.Services
             {
                 throw new Exception($"Erro ao buscar informações do clima: {ex.Message}");
             }
+        }
+
+        public async Task<WeatherResponse> GetWeatherByCoord(string lat, string lon)
+        {
+
+            string apiKey = "f5d0dd8e2bc7238a61ca96db64809e32";
+            string url = $"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}&lang=pt_br";
+
+            try
+            {
+                var resp = await httpClient.GetAsync(url);
+
+                if (!resp.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Erro ao acessar api: {resp.StatusCode}");
+                }
+                string jsonResponse = await resp.Content.ReadAsStringAsync();
+                Debug.WriteLine($"Resposta JSON: {jsonResponse}");
+                return JsonSerializer.Deserialize<WeatherResponse>(jsonResponse, jsonSerializerOptions);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar informações do clima: {ex.Message}");
+            }
+
         }
     }
 }

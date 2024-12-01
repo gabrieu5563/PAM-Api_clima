@@ -25,13 +25,16 @@
                     Margin="5,0"
                     TextColor="Black"
                     PlaceholderColor="LightGray"/>
-                <Button
-                    Grid.Column="2"
-                    Text="Buscar"
-                    Command="{Binding GetCommand}"
-                    VerticalOptions="Center"
-                    BackgroundColor="Wheat"
-                    TextColor="Black"/>
+                <Picker
+                    SelectedItem="{Binding Escolha}"
+                    Grid.Column="2">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Cidade</x:String>
+                            <x:String>Coordenada</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
             </Grid>
         </Frame>
 
