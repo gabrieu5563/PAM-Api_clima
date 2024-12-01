@@ -9,18 +9,19 @@ namespace api_clima.Models
 {
     public class WeatherResponse
     {
-        public Coord coord;
-        public List<Weather> weather;
-        public string Base;
-        public Main main;
-        public int visibility;
-        public Wind wind;
-        public Clouds clouds;
-        public int dt;
-        public Sys sys;
-        public int timezone;
-        public int id;
-        public string name;
-        public int cod;
+        public Coord coord { get; set; }
+        public List<Weather> weather { get; set; }
+        public string Base { get; set; }
+        public Main main { get; set; } // Corrigido para garantir a deserialização correta
+        public int visibility { get; set; }
+        public Wind wind { get; set; }
+        public Clouds clouds { get; set; }
+        public int dt { get; set; }
+        public Sys sys { get; set; }
+        public int timezone { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public int cod { get; set; }
     }
+
 }

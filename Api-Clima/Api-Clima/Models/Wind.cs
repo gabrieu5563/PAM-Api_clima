@@ -8,8 +8,8 @@ namespace api_clima.Models
 {
     public class Wind
     {
-        public float speed;
-        public int deg;
-        public double gust; 
+        public float speed { get; set; }
+        public int deg { get; set; }
+        public double gust { get; set; }
     }
 }

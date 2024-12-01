@@ -8,7 +8,7 @@ namespace api_clima.Models
 {
     public class Coord
     {
-        public double lat;
-        public double lon;
+        public double lat { get; set; }
+        public double lon { get; set; }
     }
 }

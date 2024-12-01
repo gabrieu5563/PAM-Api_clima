@@ -8,10 +8,10 @@ namespace api_clima.Models
 {
     public class Sys
     {
-        public int type;
-        public int id;
-        public string country;
-        public int sunrise;
-        public int sunset;
+        public int type { get; set; }
+        public int id { get; set; }
+        public string country { get; set; }
+        public int sunrise { get; set; }
+        public int sunset { get; set; }
     }
 }

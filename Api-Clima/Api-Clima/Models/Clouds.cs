@@ -8,6 +8,6 @@ namespace api_clima.Models
 {
     public class Clouds
     {
-        public int all;
+        public int all { get; set; }
     }
 }

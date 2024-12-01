@@ -8,13 +8,12 @@ namespace api_clima.Models
 {
     public class Main
     {
-        public double temp;
-        public double feels_like;
-        public double temp_min;
-        public double temp_max;
-        public int pressure;
-        public int humidity;
-        public int sea_level;
-        public int ground_level;
+        public double temp { get; set; }
+        public double feels_like { get; set; }
+        public double temp_min { get; set; }
+        public double temp_max { get; set; }
+        public int pressure { get; set; }
+        public int humidity { get; set; }
     }
+
 }
