@@ -46,7 +46,7 @@ namespace Api_Clima.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao buscar informações do clima: {ex.Message}");
+                return null;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Api_Clima.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao buscar informações do clima: {ex.Message}");
+                return null;
             }
 
         }

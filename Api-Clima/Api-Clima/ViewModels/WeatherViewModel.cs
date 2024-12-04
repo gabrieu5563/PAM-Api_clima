@@ -58,6 +58,9 @@ namespace Api_Clima.ViewModels
         private string lon;
         private int fuso;
 
+        [ObservableProperty]
+        private string color;
+
         public ICommand GetCommand { get; }
         private WeatherService service;
 
@@ -67,13 +70,14 @@ namespace Api_Clima.ViewModels
             GetCommand = new RelayCommand(async() => await getWeather());
             Task.Run(async () => await GetWeatherByCurrentLocation());
             Escolha = "Cidade";
+            Color = "#5288c1";
         }
 
         public void AssignValues(WeatherResponse response)
         {
             Temp = Math.Round(response.main.temp - 273.15) + "ºC";
             Geral = char.ToUpper(response.weather[0].description[0]) + response.weather[0].description.Substring(1).ToLower();
-            Tempextra = Math.Round(response.main.temp_max - 273.15) + "ºC/" + Math.Round(response.main.temp_min - 273.15) + "ºC. Sensação de " + Math.Round(response.main.feels_like - 273.15);
+            Tempextra = Math.Round(response.main.temp_max - 273.15) + "ºC/" + Math.Round(response.main.temp_min - 273.15) + "ºC. Sensação de " + Math.Round(response.main.feels_like - 273.15) + "ºC";
             Humidade = response.main.humidity + "%";
             Vento = response.wind.speed + "km/h";
             Visibilidade = response.visibility / 1000f + "km";
@@ -111,8 +115,16 @@ namespace Api_Clima.ViewModels
                     if(Escolha == "Coordenada")
                     {
                         string[] temp = cityInput.Split(' ');
-                        lat = temp[0];
-                        lon = temp[1];
+                        try
+                        {
+                            lat = temp[0];
+                            lon = temp[1];
+                        }
+                        catch
+                        {
+                            App.Current.MainPage.DisplayAlert($"Erro", $"Não foi possível recuperar as informações do clima de {cityInput}.", "Ok");
+                            return;
+                        }
 
                         var response = await service.GetWeatherByCoord(lat, lon);
 
@@ -141,7 +153,6 @@ namespace Api_Clima.ViewModels
                 var location = await Geolocation.GetLastKnownLocationAsync();
                 if (location == null)
                 {
-                    // Obtenha a localização atual, se a última conhecida for nula
                     location = await Geolocation.GetLocationAsync(new GeolocationRequest
                     {
                         DesiredAccuracy = GeolocationAccuracy.High,

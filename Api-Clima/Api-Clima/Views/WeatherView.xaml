@@ -2,19 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Api_Clima.Views.WeatherView"
-             Title="WeatherView">
+             BackgroundColor="#579ae1"
+             Shell.NavBarIsVisible="false">
     <VerticalStackLayout Padding="30" HorizontalOptions="Center">
         <Frame
-            BackgroundColor="Wheat"
+            BackgroundColor="{Binding Color}"
             CornerRadius="15"
             Margin="0, -10, 0, 10"
-            Padding="2">
+            Padding="2"
+            BorderColor="{Binding Color}">
             <Grid ColumnDefinitions="Auto, *, Auto">
                 <Button
                     Grid.Column="0"
                     ImageSource="lupa.png"
                     HeightRequest="25"
-                    BackgroundColor="Wheat"
+                    BackgroundColor="{Binding Color}"
                     Padding="0"
                     Command="{Binding GetCommand}"/>
                 <Entry
@@ -46,7 +48,8 @@
             Margin="10,0,0,10"/>
 
         <Frame
-            BackgroundColor="Wheat"
+            BackgroundColor="{Binding Color}"
+            BorderColor="{Binding Color}"
             Padding="10"
             CornerRadius="20"
             HasShadow="True">
@@ -59,7 +62,7 @@
                 <Image
                     Source="{Binding Image}" 
                     HeightRequest="200"
-                    VerticalOptions="Center"/>   <!--Fazer lógica de imagem-->
+                    VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Frame>
 
@@ -76,7 +79,8 @@
         <!--Sol-->
         
         <Frame
-            BackgroundColor="Wheat"
+            BackgroundColor="{Binding Color}"
+            BorderColor="{Binding Color}"
             Padding="10"
             CornerRadius="20"
             HasShadow="True">
@@ -113,7 +117,8 @@
             </Grid.ColumnDefinitions>
 
             <Frame
-                BackgroundColor="Wheat"
+                BackgroundColor="{Binding Color}"
+                BorderColor="{Binding Color}"
                 Padding="10"
                 CornerRadius="20"
                 HasShadow="True"
@@ -133,7 +138,8 @@
             </Frame>
 
             <Frame
-                BackgroundColor="Wheat"
+                BackgroundColor="{Binding Color}"
+                BorderColor="{Binding Color}"
                 Padding="10"
                 CornerRadius="20"
                 HasShadow="True"
@@ -160,7 +166,8 @@
             </Grid.ColumnDefinitions>
 
             <Frame
-                BackgroundColor="Wheat"
+                BackgroundColor="{Binding Color}"
+                BorderColor="{Binding Color}"
                 Padding="10"
                 CornerRadius="20"
                 HasShadow="True"
@@ -180,7 +187,8 @@
             </Frame>
 
             <Frame
-                BackgroundColor="Wheat"
+                BackgroundColor="{Binding Color}"
+                BorderColor="{Binding Color}"
                 Padding="10"
                 CornerRadius="20"
                 HasShadow="True"
@@ -199,6 +207,5 @@
                 </VerticalStackLayout>
             </Frame>
         </Grid>
-        <Label/> <!--aumentar tamanho do scroll-->
     </VerticalStackLayout>
 </ContentPage>
