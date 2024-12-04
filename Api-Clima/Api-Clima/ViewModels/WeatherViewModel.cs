@@ -66,6 +66,22 @@ namespace Api_Clima.ViewModels
             service = new WeatherService();
             GetCommand = new RelayCommand(async() => await getWeather());
             Task.Run(async () => await GetWeatherByCurrentLocation());
+            Escolha = "Cidade";
+        }
+
+        public void AssignValues(WeatherResponse response)
+        {
+            Temp = Math.Round(response.main.temp - 273.15) + "ºC";
+            Geral = char.ToUpper(response.weather[0].description[0]) + response.weather[0].description.Substring(1).ToLower();
+            Tempextra = Math.Round(response.main.temp_max - 273.15) + "ºC/" + Math.Round(response.main.temp_min - 273.15) + "ºC. Sensação de " + Math.Round(response.main.feels_like - 273.15);
+            Humidade = response.main.humidity + "%";
+            Vento = response.wind.speed + "km/h";
+            Visibilidade = response.visibility / 1000f + "km";
+            Pressao = response.main.pressure + "mb";
+            Image = "a" + response.weather[0].icon + "_t.png";
+            fuso = response.timezone + 10800;
+            Sunrise = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunrise).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
+            Sunset = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunset).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
         }
 
         private async Task getWeather()
@@ -83,17 +99,7 @@ namespace Api_Clima.ViewModels
                     if (response != null)
                     {
                         CityName = response.name;
-                        Temp = Math.Round(response.main.temp - 273.15) + "ºC";
-                        Geral = char.ToUpper(response.weather[0].description[0]) + response.weather[0].description.Substring(1).ToLower();
-                        Tempextra = Math.Round(response.main.temp_max - 273.15) + "ºC/" + Math.Round(response.main.temp_min - 273.15) + "ºC. Sensação de " + Math.Round(response.main.feels_like - 273.15);
-                        Humidade = response.main.humidity + "%";
-                        Vento = response.wind.speed + "km/h";
-                        Visibilidade = response.visibility / 1000f + "km";
-                        Pressao = response.main.pressure + "mb";
-                        Image = "a" + response.weather[0].icon + "_t.png";
-                        fuso = response.timezone + 10800;
-                        Sunrise = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunrise).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
-                        Sunset = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunset).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
+                        AssignValues(response);
                     }
                     else
                     {
@@ -113,17 +119,7 @@ namespace Api_Clima.ViewModels
                         if (response != null)
                         {
                             CityName = cityInput;
-                            Temp = Math.Round(response.main.temp - 273.15) + "ºC";
-                            Geral = char.ToUpper(response.weather[0].description[0]) + response.weather[0].description.Substring(1).ToLower();
-                            Tempextra = Math.Round(response.main.temp_max - 273.15) + "ºC/" + Math.Round(response.main.temp_min - 273.15) + "ºC. Sensação de " + Math.Round(response.main.feels_like - 273.15);
-                            Humidade = response.main.humidity + "%";
-                            Vento = response.wind.speed + "km/h";
-                            Visibilidade = response.visibility / 1000f + "km";
-                            Pressao = response.main.pressure + "mb";
-                            Image = "a" + response.weather[0].icon + "_t.png";
-                            fuso = response.timezone + 10800;
-                            Sunrise = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunrise).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
-                            Sunset = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunset).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
+                            AssignValues(response);
                         }
                         else
                         {
@@ -162,17 +158,7 @@ namespace Api_Clima.ViewModels
                     if (response != null)
                     {
                         CityName = $"{lat}, {lon}";
-                        Temp = Math.Round(response.main.temp - 273.15) + "ºC";
-                        Geral = char.ToUpper(response.weather[0].description[0]) + response.weather[0].description.Substring(1).ToLower();
-                        Tempextra = Math.Round(response.main.temp_max - 273.15) + "ºC/" + Math.Round(response.main.temp_min - 273.15) + "ºC. Sensação de " + Math.Round(response.main.feels_like - 273.15);
-                        Humidade = response.main.humidity + "%";
-                        Vento = response.wind.speed + "km/h";
-                        Visibilidade = response.visibility / 1000f + "km";
-                        Pressao = response.main.pressure + "mb";
-                        Image = "a" + response.weather[0].icon + "_t.png";
-                        fuso = response.timezone + 10800;
-                        Sunrise = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunrise).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
-                        Sunset = DateTimeOffset.FromUnixTimeSeconds(response.sys.sunset).AddSeconds(fuso).ToLocalTime().ToString("HH:mm");
+                        AssignValues(response);
                     }
                     else
                     {

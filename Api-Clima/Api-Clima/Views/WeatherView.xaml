@@ -199,5 +199,6 @@
                 </VerticalStackLayout>
             </Frame>
         </Grid>
+        <Label/> <!--aumentar tamanho do scroll-->
     </VerticalStackLayout>
 </ContentPage>
