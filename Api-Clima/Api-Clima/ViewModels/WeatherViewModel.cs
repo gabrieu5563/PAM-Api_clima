@@ -57,6 +57,7 @@ namespace Api_Clima.ViewModels
         private string lat;
         private string lon;
         private int fuso;
+        private string test;
 
         [ObservableProperty]
         private string color;
@@ -68,7 +69,6 @@ namespace Api_Clima.ViewModels
         {
             service = new WeatherService();
             GetCommand = new RelayCommand(async() => await getWeather());
-            Task.Run(async () => await GetWeatherByCurrentLocation());
             Escolha = "Cidade";
             Color = "#5288c1";
         }
@@ -119,6 +119,14 @@ namespace Api_Clima.ViewModels
                         {
                             lat = temp[0];
                             lon = temp[1];
+                            if (temp.Length > 2)
+                            {
+                                test = temp[2];
+                            }
+                            else
+                            {
+                                test = null;
+                            }
                         }
                         catch
                         {
@@ -126,16 +134,23 @@ namespace Api_Clima.ViewModels
                             return;
                         }
 
-                        var response = await service.GetWeatherByCoord(lat, lon);
-
-                        if (response != null)
+                        if (string.IsNullOrEmpty(test))
                         {
-                            CityName = cityInput;
-                            AssignValues(response);
+                            var response = await service.GetWeatherByCoord(lat, lon);
+
+                            if (response != null)
+                            {
+                                CityName = cityInput;
+                                AssignValues(response);
+                            }
+                            else
+                            {
+                                App.Current.MainPage.DisplayAlert($"Erro", $"Não foi possível recuperar as informações do clima de {cityInput}.", "Ok");
+                            }
                         }
                         else
                         {
-                            App.Current.MainPage.DisplayAlert($"Erro", $"Não foi possível recuperar as informações do clima de {cityInput}.", "Ok");
+                            App.Current.MainPage.DisplayAlert($"Erro", $"Mais de 2 coordenadas fornecidas. Digite apenas latitude e longitude.", "Ok");
                         }
                     }
                     else
@@ -143,48 +158,6 @@ namespace Api_Clima.ViewModels
                         App.Current.MainPage.DisplayAlert($"Erro", "Escolha cidade ou coordenada.", "Ok");
                     }
                 }
-            }
-        }
-
-        private async Task GetWeatherByCurrentLocation()
-        {
-            try
-            {
-                var location = await Geolocation.GetLastKnownLocationAsync();
-                if (location == null)
-                {
-                    location = await Geolocation.GetLocationAsync(new GeolocationRequest
-                    {
-                        DesiredAccuracy = GeolocationAccuracy.High,
-                        Timeout = TimeSpan.FromSeconds(30)
-                    });
-                }
-
-                if (location != null)
-                {
-                    lat = location.Latitude.ToString("F6");
-                    lon = location.Longitude.ToString("F6");
-
-                    var response = await service.GetWeatherByCoord(lat, lon);
-                    if (response != null)
-                    {
-                        CityName = $"{lat}, {lon}";
-                        AssignValues(response);
-                    }
-                    else
-                    {
-                        App.Current.MainPage.DisplayAlert($"Erro", "Não foi possível recuperar as informações do clima para a localização atual.", "Ok");
-                    }
-                }
-                else
-                {
-                    App.Current.MainPage.DisplayAlert("Erro", "Não foi possível determinar a localização atual.", "Ok");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Erro ao obter localização: {ex.Message}");
-                App.Current.MainPage.DisplayAlert("Erro", "Erro ao obter a localização atual.", "Ok");
             }
         }
     }
